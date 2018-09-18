@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const module = require('commander');
+const Program = require('commander');
 
-module
-  .version('0.0.1')
+Program
+  .version('0.0.3')
   .description('Compares two configuration files and shows a difference.')
   .arguments('<firstConfig> <secondConfig>')
   .option('-h, --help', 'output usage information')

@@ -1,6 +1,6 @@
 {
   "name": "gendiff-rmakarov",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "education project at hexlet.io",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "prepublishOnly": "npm run build"
   },
   "bin": {
-    "gendiff": "dist/bin/gendiff.js"
+    "gdiff": "dist/bin/gendiff.js"
   },
   "repository": {
     "type": "git",
