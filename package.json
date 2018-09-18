@@ -2,7 +2,7 @@
   "name": "gendiff-rmakarov",
   "version": "0.0.3",
   "description": "education project at hexlet.io",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "test": "jest",
     "babel-node": "babel-node",
@@ -13,6 +13,9 @@
   "bin": {
     "gdiff": "dist/bin/gendiff.js"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SmartRW/project-lvl2-s329.git"
