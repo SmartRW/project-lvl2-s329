@@ -1,6 +1,6 @@
 {
   "name": "gendiff-rmakarov",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "education project at hexlet.io",
   "main": "index.js",
   "scripts": {
