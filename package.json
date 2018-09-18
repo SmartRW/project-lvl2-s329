@@ -1,13 +1,13 @@
 {
   "name": "gendiff-rmakarov",
-  "version": "0.0.5",
+  "version": "0.0.10",
   "description": "education project at hexlet.io",
   "main": "",
   "scripts": {
     "test": "jest",
     "babel-node": "babel-node",
     "eslint": "eslint",
-    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "build": "NODE_ENV=production babel src --out-dir dist",
     "prepublishOnly": "npm run build"
   },
   "bin": {
@@ -28,7 +28,7 @@
   ],
   "author": "Roman Makarov",
   "jest": {
-  "testEnvironment": "node"
+    "testEnvironment": "node"
   },
   "license": "ISC",
   "bugs": {
@@ -36,6 +36,10 @@
   },
   "homepage": "https://github.com/SmartRW/project-lvl2-s329#readme",
   "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
