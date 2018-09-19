@@ -6,10 +6,10 @@
 
 [![Build Status](https://travis-ci.org/SmartRW/project-lvl2-s329.svg?branch=master)](https://travis-ci.org/SmartRW/project-lvl2-s329)
 
-install:
+## Install:
 
 ```sudo npm i -g gendiff-rmakarov```
 
-usage:
+## Usage:
 
 [![asciicast](https://asciinema.org/a/pLHG1e7ZrPbyngzdn4HKVZcpY.png)](https://asciinema.org/a/pLHG1e7ZrPbyngzdn4HKVZcpY)
