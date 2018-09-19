@@ -1,6 +1,6 @@
 script:
-  make lint
-  make test
+  - make lint
+  - make test
 
 language:
   node_js
