@@ -1,9 +1,9 @@
-import fs from 'fs';
 import _ from 'lodash';
+import parse from './parsers';
 
 export default (pathToFirstFile, pathToSecondFile) => {
-  const firstFile = JSON.parse(fs.readFileSync(pathToFirstFile));
-  const secondFile = JSON.parse(fs.readFileSync(pathToSecondFile));
+  const firstFile = parse(pathToFirstFile);
+  const secondFile = parse(pathToSecondFile);
   const keys1 = Object.keys(firstFile);
   const keys2 = Object.keys(secondFile);
   const compared = _.union(keys1, keys2)
