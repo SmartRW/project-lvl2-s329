@@ -1,6 +1,6 @@
 {
   "name": "gendiff-rmakarov",
-  "version": "0.0.16",
+  "version": "1.0.0",
   "description": "Compares two configuration files and shows a difference.",
   "main": "",
   "scripts": {
@@ -57,6 +57,7 @@
     "jest-cli": "^23.6.0"
   },
   "dependencies": {
-    "commander": "^2.18.0"
+    "commander": "^2.18.0",
+    "lodash": "^4.17.11"
   }
 }
