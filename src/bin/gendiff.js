@@ -9,5 +9,7 @@ commander
   .description(`${description}`)
   .arguments('<firstConfig> <secondConfig>')
   .option('-f, --format [type]', 'Output format')
-  .action((firstConfig, secondConfig) => genDiff(firstConfig, secondConfig))
+  .action((firstConfig, secondConfig) => {
+    console.log(genDiff(firstConfig, secondConfig));
+  })
   .parse(process.argv);

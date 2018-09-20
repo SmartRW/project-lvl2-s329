@@ -1,9 +1,16 @@
+import fs from 'fs';
+import path from 'path';
 import _ from 'lodash';
 import parse from './parsers';
 
+const fileData = pathToFile => [
+  fs.readFileSync(pathToFile, 'utf-8'),
+  path.extname(pathToFile),
+];
+
 export default (pathToFirstFile, pathToSecondFile) => {
-  const firstFile = parse(pathToFirstFile);
-  const secondFile = parse(pathToSecondFile);
+  const firstFile = parse(...fileData(pathToFirstFile));
+  const secondFile = parse(...fileData(pathToSecondFile));
   const keys1 = Object.keys(firstFile);
   const keys2 = Object.keys(secondFile);
   const compared = _.union(keys1, keys2)
@@ -20,6 +27,5 @@ export default (pathToFirstFile, pathToSecondFile) => {
     }, [])
     .map(str => `  ${str}`);
   const result = ['{', ...compared, '}\n'].join('\n');
-  console.log(result);
   return result;
 };
