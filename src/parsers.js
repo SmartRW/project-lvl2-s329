@@ -8,4 +8,4 @@ const formatAction = {
   '.ini': ini.decode,
 };
 
-export default (str, fileExtension) => formatAction[fileExtension](str);
+export default fileExtension => formatAction[fileExtension];

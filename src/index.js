@@ -1,16 +1,17 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
-import parse from './parsers';
+import getParser from './parsers';
 
-const fileData = pathToFile => [
-  fs.readFileSync(pathToFile, 'utf-8'),
-  path.extname(pathToFile),
-];
+const parse = (pathToFile) => {
+  const fileExtension = path.extname(pathToFile);
+  const fileContent = fs.readFileSync(pathToFile, 'utf-8');
+  return getParser(fileExtension)(fileContent);
+};
 
 export default (pathToFirstFile, pathToSecondFile) => {
-  const firstFile = parse(...fileData(pathToFirstFile));
-  const secondFile = parse(...fileData(pathToSecondFile));
+  const firstFile = parse(pathToFirstFile);
+  const secondFile = parse(pathToSecondFile);
   const keys1 = Object.keys(firstFile);
   const keys2 = Object.keys(secondFile);
   const compared = _.union(keys1, keys2)
