@@ -14,6 +14,5 @@ export default (pathToFirstFile, pathToSecondFile, type = 'tree') => {
   const firstFile = parse(pathToFirstFile);
   const secondFile = parse(pathToSecondFile);
   const ast = buildAST(firstFile, secondFile);
-  console.log(ast);
   return render(ast, type);
 };
