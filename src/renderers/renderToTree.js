@@ -28,7 +28,7 @@ const render = (ast) => {
         ancestor: node => `${indentBeforeNodeValue}  ${node.key}: ${iter(node.children, treeLevel + 1)}`,
         added: node => `${indentBeforeNodeValue}+ ${node.key}: ${stringify(node.value)}`,
         removed: node => `${indentBeforeNodeValue}- ${node.key}: ${stringify(node.value)}`,
-        changed: node => `${indentBeforeNodeValue}+ ${node.key}: ${stringify(node.currentValue)}\n${indentBeforeNodeValue}- ${node.key}: ${stringify(node.previousValue)}`,
+        changed: node => `${indentBeforeNodeValue}+ ${node.key}: ${stringify(node.value)}\n${indentBeforeNodeValue}- ${node.key}: ${stringify(node.previousValue)}`,
         unchanged: node => `${indentBeforeNodeValue}  ${node.key}: ${stringify(node.value)}`,
       };
 
