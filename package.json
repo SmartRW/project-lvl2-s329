@@ -1,10 +1,10 @@
 {
   "name": "gendiff-rmakarov",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "description": "Compares two configuration files and shows a difference.",
   "main": "",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "babel-node": "babel-node",
     "eslint": "eslint",
     "build": "NODE_ENV=production babel src --out-dir dist",
