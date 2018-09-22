@@ -1,6 +1,6 @@
 {
   "name": "gendiff-rmakarov",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "Compares two configuration files and shows a difference.",
   "main": "",
   "scripts": {
