@@ -12,4 +12,4 @@
 
 ## Usage:
 
-[![asciicast](https://asciinema.org/a/iSVM1hwff6gXtydXEHoGDLbE8.png)](https://asciinema.org/a/iSVM1hwff6gXtydXEHoGDLbE8)
+[![asciicast](https://asciinema.org/a/Rn33VEMRPJmFcCNV2dFx328gC.png)](https://asciinema.org/a/Rn33VEMRPJmFcCNV2dFx328gC)
