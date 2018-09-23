@@ -10,9 +10,9 @@ commander
   .arguments('<firstConfig> <secondConfig>')
   .option('-f, --format [type]',
     `Output format:
-    "tree" (default) - shows diff as a tree;
+    "tree" - shows diff as a tree;
     "plain" - shows diff as a list;
-    "json" - shows diff as a JSON string`)
+    "json" - shows diff as a JSON string`, 'tree')
   .action((firstConfig, secondConfig) => {
     console.log(genDiff(firstConfig, secondConfig, commander.format));
   })

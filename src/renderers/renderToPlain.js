@@ -1,14 +1,14 @@
 import _ from 'lodash';
 
+const buildValueString = node => (_.isObject(node) ? '[complex value]' : node);
+
 const render = (ast) => {
   const iter = (data, keyAncestor) => {
-    const currentValue = node => (_.isObject(node.value) ? '[complex value]' : node.value);
-    const previousValue = node => (_.isObject(node.previousValue) ? '[complex value]' : node.previousValue);
     const nodeCases = {
       ancestor: node => iter(node.children, `${keyAncestor}${node.key}.`),
-      added: node => `Property ${keyAncestor}${node.key} was added with value: ${currentValue(node)}`,
+      added: node => `Property ${keyAncestor}${node.key} was added with value: ${buildValueString(node.value)}`,
       removed: node => `Property ${keyAncestor}${node.key} was removed`,
-      changed: node => `Property ${keyAncestor}${node.key} was updated. From ${previousValue(node)} to ${currentValue(node)}`,
+      changed: node => `Property ${keyAncestor}${node.key} was updated. From ${buildValueString(node.previousValue)} to ${buildValueString(node.value)}`,
     };
 
     const getCase = node => nodeCases[node.type];

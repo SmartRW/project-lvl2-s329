@@ -10,7 +10,7 @@ const parse = (pathToFile) => {
   return getParser(fileExtension)(fileContent);
 };
 
-export default (pathToFirstFile, pathToSecondFile, type = 'tree') => {
+export default (pathToFirstFile, pathToSecondFile, type) => {
   const firstFile = parse(pathToFirstFile);
   const secondFile = parse(pathToSecondFile);
   const ast = buildAST(firstFile, secondFile);

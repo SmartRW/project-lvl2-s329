@@ -10,32 +10,33 @@ const render = (ast) => {
       ? ' '.repeat(singleIndentSpacesCount * 3)
       : indentBeforeNodeValue;
 
+    const objectToString = (obj) => {
+      const keys = Object.keys(obj);
+      return keys
+        .map(key => (_.isObject(obj[key]) ? objectToString(obj[key]) : `${indentBeforeObject}${key}: ${obj[key]}`))
+        .join('\n');
+    };
+
+    const stringify = (value) => {
+      const objectCase = `{\n${indentBeforeNodeValue}${objectToString(value)}\n  ${indentBeforeNodeValue}}`;
+      const primitiveCase = `${value}`;
+      return _.isObject(value) ? objectCase : primitiveCase;
+    };
+
     const result = tree.map((element) => {
-      const objectToString = (obj) => {
-        const keys = Object.keys(obj);
-        return keys
-          .map(key => (_.isObject(obj[key]) ? objectToString(obj[key]) : `${indentBeforeObject}${key}: ${obj[key]}`))
-          .join('\n');
-      };
-
-      const stringify = (value) => {
-        const objectCase = `{\n${indentBeforeNodeValue}${objectToString(value)}\n  ${indentBeforeNodeValue}}`;
-        const primitiveCase = `${value}`;
-        return _.isObject(value) ? objectCase : primitiveCase;
-      };
-
       const nodeCases = {
         ancestor: node => `${indentBeforeNodeValue}  ${node.key}: ${iter(node.children, treeLevel + 1)}`,
         added: node => `${indentBeforeNodeValue}+ ${node.key}: ${stringify(node.value)}`,
         removed: node => `${indentBeforeNodeValue}- ${node.key}: ${stringify(node.value)}`,
-        changed: node => `${indentBeforeNodeValue}+ ${node.key}: ${stringify(node.value)}\n${indentBeforeNodeValue}- ${node.key}: ${stringify(node.previousValue)}`,
+        changed: node => [`${indentBeforeNodeValue}+ ${node.key}: ${stringify(node.value)}`,
+          `${indentBeforeNodeValue}- ${node.key}: ${stringify(node.previousValue)}`],
         unchanged: node => `${indentBeforeNodeValue}  ${node.key}: ${stringify(node.value)}`,
       };
 
       const getCase = node => nodeCases[node.type];
       return getCase(element)(element);
     });
-    return ['{', ...result, `${indentBeforeEndBrace}}`].join('\n');
+    return _.flatten(['{', ...result, `${indentBeforeEndBrace}}`]).join('\n');
   };
   return `${iter(ast)}\n`;
 };
