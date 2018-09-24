@@ -27,9 +27,9 @@ const render = (ast, treeLevel = 0) => {
   };
 
   const getCase = node => nodeCases[node.type];
-  const result = _.flatten(ast.map(node => getCase(node)(node)));
-
-  return `{\n${result.join('\n')}\n${braceIndent}}`;
+  const buildStringFromNode = node => getCase(node)(node);
+  const result = _.flatten(ast.map(buildStringFromNode)).join('\n');
+  return `{\n${result}\n${braceIndent}}`;
 };
 
 export default render;
