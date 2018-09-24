@@ -8,4 +8,4 @@ const renderersTypes = {
   json: renderToJSON,
 };
 
-export default (data, type) => renderersTypes[type](data);
+export default (data, type) => `${renderersTypes[type](data)}\n`;

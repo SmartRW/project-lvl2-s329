@@ -19,7 +19,7 @@ const render = (ast) => {
       .join('\n');
     return arr;
   };
-  return `${iter(ast, '')}\n`;
+  return iter(ast, '');
 };
 
 export default render;
