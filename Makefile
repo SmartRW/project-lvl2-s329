@@ -13,6 +13,9 @@ run:
 test:
 	npm test
 
+watch:
+	npm watch
+
 build:
 	rm-rf dist
 	npm run build
