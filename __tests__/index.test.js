@@ -11,7 +11,6 @@ const pathToAfterYAML = '__tests__/__fixtures__/after.yaml';
 const pathToBeforeINI = '__tests__/__fixtures__/before.ini';
 const pathToAfterINI = '__tests__/__fixtures__/after.ini';
 
-
 test('render to tree simple JSON', () => {
   expect(genDiff(pathToBeforeJSON, pathToAfterJSON, 'tree')).toBe(fs.readFileSync(pathToResult, 'utf-8'));
 });
