@@ -1,44 +1,36 @@
 import _ from 'lodash';
 
-const singleIndentSpacesCount = 2;
+const singleIndentCount = 4;
 
-const render = (ast) => {
-  const iter = (tree, treeLevel = 0) => {
-    const indentBeforeNodeValue = ' '.repeat(singleIndentSpacesCount + treeLevel * singleIndentSpacesCount * 2);
-    const indentBeforeEndBrace = ' '.repeat(treeLevel * singleIndentSpacesCount * 2);
-    const indentBeforeObject = treeLevel === 0
-      ? ' '.repeat(singleIndentSpacesCount * 3)
-      : indentBeforeNodeValue;
-
-    const objectToString = (obj) => {
-      const keys = Object.keys(obj);
-      return keys
-        .map(key => (_.isObject(obj[key]) ? objectToString(obj[key]) : `${indentBeforeObject}${key}: ${obj[key]}`))
+const render = (ast, treeLevel = 0) => {
+  const indentBeforeUnchanged = ' '.repeat(treeLevel * singleIndentCount + singleIndentCount);
+  const indentBeforeChanged = ' '.repeat(treeLevel * singleIndentCount + singleIndentCount / 2);
+  const indentBeforeObject = ' '.repeat((treeLevel + 1) * singleIndentCount + singleIndentCount);
+  const stringify = (data) => {
+    const makeStringFromObject = (obj) => {
+      const objString = Object.keys(obj)
+        .map(key => `${indentBeforeObject}${key}: ${stringify(obj[key])}`)
         .join('\n');
+      return `{\n${objString}\n${indentBeforeUnchanged}}`;
     };
-
-    const stringify = (value) => {
-      const objectCase = `{\n${indentBeforeNodeValue}${objectToString(value)}\n  ${indentBeforeNodeValue}}`;
-      const primitiveCase = `${value}`;
-      return _.isObject(value) ? objectCase : primitiveCase;
-    };
-
-    const result = tree.map((element) => {
-      const nodeCases = {
-        ancestor: node => `${indentBeforeNodeValue}  ${node.key}: ${iter(node.children, treeLevel + 1)}`,
-        added: node => `${indentBeforeNodeValue}+ ${node.key}: ${stringify(node.value)}`,
-        removed: node => `${indentBeforeNodeValue}- ${node.key}: ${stringify(node.value)}`,
-        changed: node => [`${indentBeforeNodeValue}+ ${node.key}: ${stringify(node.value)}`,
-          `${indentBeforeNodeValue}- ${node.key}: ${stringify(node.previousValue)}`],
-        unchanged: node => `${indentBeforeNodeValue}  ${node.key}: ${stringify(node.value)}`,
-      };
-
-      const getCase = node => nodeCases[node.type];
-      return getCase(element)(element);
-    });
-    return _.flatten(['{', ...result, `${indentBeforeEndBrace}}`]).join('\n');
+    return _.isObject(data) ? makeStringFromObject(data) : `${data}`;
   };
-  return `${iter(ast)}\n`;
+
+  const nodeCases = {
+    ancestor: node => `${indentBeforeUnchanged}${node.key}: {\n${render(node.children, treeLevel + 1)}\n${indentBeforeUnchanged}}`,
+    added: node => `${indentBeforeChanged}+ ${node.key}: ${stringify(node.value)}`,
+    removed: node => `${indentBeforeChanged}- ${node.key}: ${stringify(node.value)}`,
+    changed: node => [`${indentBeforeChanged}+ ${node.key}: ${stringify(node.value)}`,
+      `${indentBeforeChanged}- ${node.key}: ${stringify(node.previousValue)}`],
+    unchanged: node => `${indentBeforeUnchanged}${node.key}: ${stringify(node.value)}`,
+  };
+
+  const getCase = node => nodeCases[node.type];
+  const result = _.flatten(ast.map(node => getCase(node)(node)));
+
+  return result.join('\n');
 };
 
-export default render;
+const beautify = ast => `{\n${render(ast)}\n}\n`;
+
+export default beautify;
