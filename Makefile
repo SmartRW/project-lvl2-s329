@@ -14,7 +14,7 @@ test:
 	npm test
 
 watch:
-	npm watch
+	npx jest --watch
 
 build:
 	rm-rf dist
